@@ -22,13 +22,11 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [
-        { from: "res", to: "res" },
-      ],
+      patterns: [{ from: 'res', to: 'res' }],
     }),
     new HtmlWebpackPlugin({
-      title: 'Color Picker Game'
-    }) 
+      title: 'Color Picker Game',
+    }),
   ],
   devServer: {
     static: {
