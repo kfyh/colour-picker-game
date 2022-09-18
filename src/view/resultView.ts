@@ -9,7 +9,6 @@ export class ResultView {
   private infoText: Text;
   private startText: Text;
 
-
   private readonly eventEmitter = new EventEmitter<string, any>();
 
   constructor(stage: Container, model: Model) {
@@ -31,7 +30,7 @@ export class ResultView {
   }
 
   public update(delta: number): void {
-    const score = this.model.state.score
+    const score = this.model.state.score;
     this.infoText.text = `Game Over!
     You Scored ${score}`;
   }

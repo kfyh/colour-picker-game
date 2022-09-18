@@ -54,7 +54,7 @@ export class GameView {
 
   public update(delta: number): void {
     const time = Math.round(this.model.state.timeRemaining / 1000);
-    const score = this.model.state.score
+    const score = this.model.state.score;
     this.infoText.text = `time: ${time}, score: ${score}`;
     this.winText.text = this.model.ui.roundResult;
 
@@ -66,8 +66,8 @@ export class GameView {
         this.timeRandomColour = 0;
       }
     } else {
-        this.chosenColour.tint =
-            this.model.settings.colours[this.model.state.currentResultIndex];  
+      this.chosenColour.tint =
+        this.model.settings.colours[this.model.state.currentResultIndex];
     }
   }
 

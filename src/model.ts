@@ -12,7 +12,7 @@ export interface Model {
     currentUserSelectedIndex: number;
     currentState: string;
     timeRemaining: number;
-    score: number
+    score: number;
   };
   ui: {
     roundResult: string;

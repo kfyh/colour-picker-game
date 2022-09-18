@@ -36,13 +36,13 @@ export class View {
 
   public update(delta: number): void {
     if (this.model.state.currentState === STATES.ENDED) {
-        this.resultContainer.visible = true;
-        this.gameContainer.visible = false;
-        this.resultView.update(delta);
+      this.resultContainer.visible = true;
+      this.gameContainer.visible = false;
+      this.resultView.update(delta);
     } else {
-        this.resultContainer.visible = false;
-        this.gameContainer.visible = true;
-        this.gameView.update(delta);
+      this.resultContainer.visible = false;
+      this.gameContainer.visible = true;
+      this.gameView.update(delta);
     }
   }
 

@@ -10,7 +10,10 @@ export class Game {
   }
 
   public setSelected(index: number): void {
-    if (this.model.state.currentState === STATES.SELECTING || this.model.state.currentState === STATES.STARTED) {
+    if (
+      this.model.state.currentState === STATES.SELECTING ||
+      this.model.state.currentState === STATES.STARTED
+    ) {
       this.model.state.currentUserSelectedIndex = index;
       this.model.state.currentResultIndex = randomInt(0, 4);
       this.model.state.currentState = STATES.CYCLING;
@@ -21,11 +24,13 @@ export class Game {
 
   public update(delta: number): void {
     this.time += delta;
-    if (this.model.state.currentState !== STATES.STARTED &&
-        this.model.state.currentState !== STATES.ENDED) {
+    if (
+      this.model.state.currentState !== STATES.STARTED &&
+      this.model.state.currentState !== STATES.ENDED
+    ) {
       this.model.state.timeRemaining -= delta;
       if (this.model.state.timeRemaining <= 0) {
-        this.model.ui.roundResult = 'Time\'s Up!';
+        this.model.ui.roundResult = "Time's Up!";
         this.model.state.currentState = STATES.ENDED;
       }
     }
@@ -42,7 +47,7 @@ export class Game {
       const selected = this.model.state.currentUserSelectedIndex;
       if (result === selected) {
         this.model.state.score++;
-          this.model.ui.roundResult = 'You Won!!';
+        this.model.ui.roundResult = 'You Won!!';
       } else {
         this.model.ui.roundResult = 'Better Luck Next Time!!';
       }
