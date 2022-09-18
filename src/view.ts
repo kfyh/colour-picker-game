@@ -10,6 +10,7 @@ export class View {
   private chosenColour: Graphics;
   private selectionButtons: Graphics[];
   private debugText: Text;
+  private winText: Text;
 
   private timeRandomColour = 0;
 
@@ -19,6 +20,7 @@ export class View {
     this.stage = stage;
     this.model = model;
     this.debugText = new Text();
+    this.winText = new Text();
     this.chosenColour = new Graphics();
     this.selectionButtons = [];
   }
@@ -26,6 +28,9 @@ export class View {
   public buildScene(): void {
     this.debugText.text = this.model.state.currentState;
     this.stage.addChild(this.debugText);
+
+    this.winText.y = 20;
+    this.stage.addChild(this.winText);
 
     this.chosenColour.beginFill(0xffffff).drawCircle(0, 0, 100).endFill();
     this.chosenColour.x = 200;
@@ -60,6 +65,14 @@ export class View {
     }
 
     if (this.model.state.currentState === STATES.SHOWRESULT) {
+        const result = this.model.state.currentResultIndex;
+        const selected = this.model.state.currentUserSelectedIndex;
+        console.log(`${result} === ${selected} : ${String(result == selected)}`);
+        if (result == selected) {
+            this.winText.text = 'You Won!!';
+        } else {
+            this.winText.text = 'Better Luck Next Time!!';
+        }
       this.chosenColour.tint =
         this.model.settings.colours[this.model.state.currentResultIndex];
     }
