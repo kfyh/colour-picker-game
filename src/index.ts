@@ -6,9 +6,13 @@ import { View } from './view';
 const gameModel: Model = {
   state: {
     currentResultIndex: 0,
-    nextResultIndex: 0,
     currentUserSelectedIndex: 0,
     currentState: STATES.STARTED,
+    timeRemaining: 20000,
+    score: 0
+  },
+  ui: {
+    roundResult: ''
   },
   settings: {
     colours: [0x0000ff, 0x00ff00, 0xff0000, 0xffff00, 0xffa500],
@@ -27,7 +31,6 @@ view.buildScene();
 
 const game = new Game(gameModel);
 view.on('click', (index: number) => {
-  console.log('index on click');
   game.setSelected(index);
 });
 

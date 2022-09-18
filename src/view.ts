@@ -9,7 +9,7 @@ export class View {
 
   private chosenColour: Graphics;
   private selectionButtons: Graphics[];
-  private debugText: Text;
+  private infoText: Text;
   private winText: Text;
 
   private timeRandomColour = 0;
@@ -19,15 +19,15 @@ export class View {
   constructor(stage: Container, model: Model) {
     this.stage = stage;
     this.model = model;
-    this.debugText = new Text();
+    this.infoText = new Text();
     this.winText = new Text();
     this.chosenColour = new Graphics();
     this.selectionButtons = [];
   }
 
   public buildScene(): void {
-    this.debugText.text = this.model.state.currentState;
-    this.stage.addChild(this.debugText);
+    this.infoText.text = this.model.state.currentState;
+    this.stage.addChild(this.infoText);
 
     this.winText.y = 20;
     this.stage.addChild(this.winText);
@@ -53,28 +53,21 @@ export class View {
   }
 
   public update(delta: number): void {
-    this.debugText.text = this.model.state.currentState;
+    const time = Math.round(this.model.state.timeRemaining / 1000);
+    const score = this.model.state.score
+    this.infoText.text = `time: ${time}, score: ${score}`;
+    this.winText.text = this.model.ui.roundResult;
 
     if (this.model.state.currentState === STATES.CYCLING) {
       this.timeRandomColour += delta;
-      if (this.timeRandomColour >= 200) {
+      if (this.timeRandomColour >= 100) {
         const randomColour = randomInt(0, 4);
         this.chosenColour.tint = this.model.settings.colours[randomColour];
         this.timeRandomColour = 0;
       }
-    }
-
-    if (this.model.state.currentState === STATES.SHOWRESULT) {
-        const result = this.model.state.currentResultIndex;
-        const selected = this.model.state.currentUserSelectedIndex;
-        console.log(`${result} === ${selected} : ${String(result == selected)}`);
-        if (result == selected) {
-            this.winText.text = 'You Won!!';
-        } else {
-            this.winText.text = 'Better Luck Next Time!!';
-        }
-      this.chosenColour.tint =
-        this.model.settings.colours[this.model.state.currentResultIndex];
+    } else {
+        this.chosenColour.tint =
+            this.model.settings.colours[this.model.state.currentResultIndex];  
     }
   }
 
@@ -91,7 +84,6 @@ export class View {
   }
 
   private onButtonClicked(index: number): void {
-    console.log(`button clicked ${index}`);
-    this.eventEmitter.emit('click', [index]);
+    this.eventEmitter.emit('click', index);
   }
 }

@@ -10,19 +10,23 @@ export class Game {
   }
 
   public setSelected(index: number): void {
-    if (this.model.state.currentState === STATES.SELECTING) {
+    if (this.model.state.currentState === STATES.SELECTING || this.model.state.currentState === STATES.STARTED) {
       this.model.state.currentUserSelectedIndex = index;
       this.model.state.currentResultIndex = randomInt(0, 4);
       this.model.state.currentState = STATES.CYCLING;
+      this.model.ui.roundResult = '';
       this.time = 0;
     }
   }
 
   public update(delta: number): void {
     this.time += delta;
-    if (this.model.state.currentState === STATES.STARTED) {
-      if (this.time >= 1000) {
-        this.model.state.currentState = STATES.SELECTING;
+    if (this.model.state.currentState !== STATES.STARTED &&
+        this.model.state.currentState !== STATES.ENDED) {
+      this.model.state.timeRemaining -= delta;
+      if (this.model.state.timeRemaining <= 0) {
+        this.model.ui.roundResult = 'Time\'s Up!';
+        this.model.state.currentState = STATES.ENDED;
       }
     }
 
@@ -34,10 +38,17 @@ export class Game {
     }
 
     if (this.model.state.currentState === STATES.SHOWRESULT) {
-      if (this.time >= 1000) {
-        this.model.state.currentState = STATES.SELECTING;
-        this.time = 0;
+      const result = this.model.state.currentResultIndex;
+      const selected = this.model.state.currentUserSelectedIndex;
+      if (result === selected) {
+        this.model.state.score++;
+          this.model.ui.roundResult = 'You Won!!';
+      } else {
+        this.model.ui.roundResult = 'Better Luck Next Time!!';
       }
+
+      this.model.state.currentState = STATES.SELECTING;
+      this.time = 0;
     }
   }
 }

@@ -9,9 +9,13 @@ export const STATES = {
 export interface Model {
   state: {
     currentResultIndex: number;
-    nextResultIndex: number;
     currentUserSelectedIndex: number;
     currentState: string;
+    timeRemaining: number;
+    score: number
+  };
+  ui: {
+    roundResult: string;
   };
   settings: {
     colours: number[];
