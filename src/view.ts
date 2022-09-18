@@ -1,4 +1,4 @@
-import { Container, Graphics, Text } from 'pixi.js';
+import { Container } from 'pixi.js';
 import { Model, STATES } from './model';
 import { GameView } from './view/gameView';
 import { ResultView } from './view/resultView';
