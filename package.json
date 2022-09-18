@@ -26,6 +26,7 @@
     "webpack-dev-server": "^4.11.0"
   },
   "dependencies": {
+    "eventemitter3": "^4.0.7",
     "pixi.js": "^6.5.3"
   }
 }
