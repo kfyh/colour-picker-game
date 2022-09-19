@@ -4,7 +4,7 @@
     "start": "webpack serve --mode development",
     "linter": "prettier --check . && eslint .",
     "linter:fix": "prettier --write . && eslint --fix .",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",

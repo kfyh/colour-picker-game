@@ -1,6 +1,7 @@
 import { View } from '../src/view';
 import { Model, STATES } from '../src/model';
 import { Container } from 'pixi.js';
+import * as random from '../src/utils/randomInt';
 
 describe('view', () => {
   const model: Model = {
@@ -33,6 +34,7 @@ describe('view', () => {
     model.ui = {
       roundResult: '',
     };
+    view.update(0);
   });
 
   test('if state not ended then show game', () => {
@@ -43,14 +45,25 @@ describe('view', () => {
     expect(stage).toMatchSnapshot();
   });
 
+  test('if state selecting then show result colour', () => {
+    model.state.currentState = STATES.SELECTING;
+    view.update(0);
+
+    expect(stage).toMatchSnapshot();
+  });
+
+  test('if state cycling then show random colour', () => {
+    model.state.currentState = STATES.CYCLING;
+    const spy = jest.spyOn(random, 'randomInt').mockReturnValue(2);
+    view.update(100);
+
+    expect(spy).toHaveBeenCalled();
+    expect(stage).toMatchSnapshot();
+  })
+
   test('if state is ended then show result', () => {
-    model.state = {
-      currentResultIndex: 2,
-      currentUserSelectedIndex: 2,
-      currentState: STATES.ENDED,
-      timeRemaining: 0,
-      score: 5,
-    };
+    model.state.currentState = STATES.ENDED;
+    model.state.score = 5;
 
     view.update(0);
 
