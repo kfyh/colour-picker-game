@@ -17,9 +17,11 @@ export class View {
     this.model = model;
 
     this.gameContainer = new Container();
+    this.gameContainer.name = 'game';
     this.gameView = new GameView(this.gameContainer, this.model);
 
     this.resultContainer = new Container();
+    this.resultContainer.name = 'result';
     this.resultView = new ResultView(this.resultContainer, this.model);
   }
 

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`game after game started, when time is up then game will end 1`] = `
+{
+  "roundResult": "Time's Up!",
+}
+`;
+
+exports[`game when cycling colour, after 2 seconds result is shown - loss 1`] = `
+{
+  "roundResult": "Better Luck Next Time!!",
+}
+`;
+
+exports[`game when cycling colour, after 2 seconds result is shown - win 1`] = `
+{
+  "roundResult": "You Won!!",
+}
+`;
