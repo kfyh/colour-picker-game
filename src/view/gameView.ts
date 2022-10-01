@@ -1,6 +1,6 @@
 import { Container, Graphics, Text } from 'pixi.js';
 import { Model, STATES } from '../model';
-import { randomInt } from '../utils/randomInt';
+import { randomIntLocal } from '../utils/randomInt';
 import { EventEmitter } from 'eventemitter3';
 
 export class GameView {
@@ -42,6 +42,7 @@ export class GameView {
     for (let i = 0; i < this.model.settings.colours.length; i++) {
       const colour = this.model.settings.colours[i];
       const button = new Graphics();
+      button.name = `button-${i}`;
       button.beginFill(colour).drawCircle(0, 0, 30).endFill();
       button.x = 50 + 75 * i;
       button.y = 550;
@@ -61,7 +62,7 @@ export class GameView {
     if (this.model.state.currentState === STATES.CYCLING) {
       this.timeRandomColour += delta;
       if (this.timeRandomColour >= 100) {
-        const randomColour = randomInt(0, 4);
+        const randomColour = randomIntLocal(0, 4);
         this.chosenColour.tint = this.model.settings.colours[randomColour];
         this.timeRandomColour = 0;
       }

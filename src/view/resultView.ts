@@ -22,6 +22,7 @@ export class ResultView {
     this.infoText.text = this.model.state.currentState;
     this.stage.addChild(this.infoText);
 
+    this.startText.name = 'startBtn';
     this.startText.y = 400;
     this.startText.text = 'Click to Play Again';
     this.startText.interactive = true;

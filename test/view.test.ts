@@ -54,7 +54,7 @@ describe('view', () => {
 
   test('if state cycling then show random colour', () => {
     model.state.currentState = STATES.CYCLING;
-    const spy = jest.spyOn(random, 'randomInt').mockReturnValue(2);
+    const spy = jest.spyOn(random, 'randomIntLocal').mockReturnValue(2);
     view.update(100);
 
     expect(spy).toHaveBeenCalled();

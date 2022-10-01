@@ -15,10 +15,16 @@ export class Game {
       this.model.state.currentState === STATES.STARTED
     ) {
       this.model.state.currentUserSelectedIndex = index;
-      this.model.state.currentResultIndex = randomInt(0, 4);
+
+      this.model.state.currentResultIndex = -1
       this.model.state.currentState = STATES.CYCLING;
       this.model.ui.roundResult = '';
       this.time = 0;
+
+      randomInt(0,4)
+        .then((result) => {
+          this.model.state.currentResultIndex = result;
+        }, null);
     }
   }
 
@@ -36,7 +42,7 @@ export class Game {
     }
 
     if (this.model.state.currentState === STATES.CYCLING) {
-      if (this.time >= 2000) {
+      if (this.time >= 2000 && this.model.state.currentResultIndex >= 0) {
         this.model.state.currentState = STATES.SHOWRESULT;
         this.time = 0;
       }
