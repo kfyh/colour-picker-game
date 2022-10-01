@@ -16,15 +16,14 @@ export class Game {
     ) {
       this.model.state.currentUserSelectedIndex = index;
 
-      this.model.state.currentResultIndex = -1
+      this.model.state.currentResultIndex = -1;
       this.model.state.currentState = STATES.CYCLING;
       this.model.ui.roundResult = '';
       this.time = 0;
 
-      randomInt(0,4)
-        .then((result) => {
-          this.model.state.currentResultIndex = result;
-        }, null);
+      randomInt(0, 4).then((result) => {
+        this.model.state.currentResultIndex = result;
+      }, null);
     }
   }
 

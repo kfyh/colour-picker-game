@@ -4,7 +4,9 @@ import { Model, STATES } from '../src/model';
 describe('game', () => {
   test('when game started, selection will start game', (done) => {
     const origFetch = global.fetch;
-    global.fetch = jest.fn().mockResolvedValue({ok: true, json: () => ({data: [123]})});
+    global.fetch = jest
+      .fn()
+      .mockResolvedValue({ ok: true, json: () => ({ data: [123] }) });
     const model: Partial<Model> = {
       state: {
         currentResultIndex: -1,
@@ -20,8 +22,10 @@ describe('game', () => {
     const game = new Game(model as Model);
     game.setSelected(2);
     const checkState = (): void => {
-      if (model.state?.currentState !== STATES.CYCLING ||
-        model.state?.currentResultIndex < 0) {
+      if (
+        model.state?.currentState !== STATES.CYCLING ||
+        model.state?.currentResultIndex < 0
+      ) {
         setInterval(checkState, 10);
       } else {
         expect(model.state?.currentResultIndex).not.toBe(-1);
@@ -33,7 +37,6 @@ describe('game', () => {
     };
 
     checkState();
-
   });
 
   test('after game started, when time is up then game will end', () => {

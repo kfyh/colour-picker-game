@@ -27,10 +27,9 @@ jobs:
           npm install
           npm run linter
           npm run build
-      
+
       - name: Test
         run: |
           npm install
           npm run linter
           npm test
-

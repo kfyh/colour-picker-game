@@ -59,7 +59,7 @@ describe('view', () => {
 
     expect(spy).toHaveBeenCalled();
     expect(stage).toMatchSnapshot();
-  })
+  });
 
   test('if state is ended then show result', () => {
     model.state.currentState = STATES.ENDED;
